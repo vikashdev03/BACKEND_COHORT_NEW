@@ -13,4 +13,4 @@ app.get('/home', (req, res) => {
     res.send('This is home page')
 })
 
-app.listen(3000) // server start krna 
+app.listen(3000) // server start krna  
