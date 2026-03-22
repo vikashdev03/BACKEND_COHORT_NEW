@@ -20,6 +20,7 @@ app.post("/notes", async (req, res)=>{
     }) 
      // IN MUMBAI Me   noteModel.create() => jis  title aur description ko humne req.body se destructure kiya hai usko noteModel ke create method me pass kar diya hai , aur ye method hume ek promise return karega , jisme hum then method ka use karke response bhej sakte hai 
 
+     
     res.status(201).json ({
         message : "note created sussfully",
         note
