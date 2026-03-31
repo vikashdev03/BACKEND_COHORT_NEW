@@ -8,10 +8,10 @@ const mongoose = require("mongoose")
 const ConnectTODb = require("./src/config/database")
 
 
-ConnectTODb()
+ConnectTODb() 
 
 app.listen(3000, ()=> {
     console.log("server is runnning on the port 3000")
+    
 })
 
- 
