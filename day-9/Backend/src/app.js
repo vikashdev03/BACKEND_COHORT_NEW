@@ -2,9 +2,12 @@
 
 const express = require("express")
 const noteModel = require("./models/note.model")
+const cors = require("cors")
 
 const app = express()
 app.use(express.json())
+app.use(cors())
+
 
 /* -POST/api/notes
 * - create new note and save data in mongodb
@@ -20,7 +23,7 @@ app.post('/api/notes',async (req ,res)=>{
         message :"note created sucessfully",
         note
     })
-})
+}) 
 /* - GET/api/notes
 * - Fetch all the notes data from mongodb and send them in the response
  */
