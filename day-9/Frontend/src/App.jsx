@@ -7,41 +7,21 @@ import axios from 'axios'
 function App() {
 
   //yaha notes ek state variblae hai  = matlab notes variable  jo notes ko store karega array of object hoga jisme har object me ek note ka data hoga 
-  const [notes, setNotes] = useState([
-    {
-      title: "test title 1",
-      description: "test description"
-    },
+  const [notes, setNotes] = useState([])
 
-    {
-      title: "test title 2",
-      description: "test description"
-    },
-
-    {
-      title: "test title 3",
-      description: "test description"
-    },
-
-    {
-      title: "test title 4",
-      description: "test description"
-    },
-  ])
-
-    axios.get('http://localhost:3000/api/notes')
-    .then((res)=>{
-      console.log(res.data)
-      setNotes(res.data.notes)
+  axios.get("http://localhost:3000/api/notes")
+    .then(res => {
+      setNotes(res.data.notes) // res.data.notes me humne backend se jo data aya hai usme se notes ko access kiya hai aur usko setNotes me store kar diya hai
     })
+
+
 
 
   return (
     <>
-
       <div className="notes">
         {
-          notes.map(note=> {
+          notes.map(note => {
             return <div className="note">
               <h1>{note.title}</h1>
               <p>{note.description}</p>
