@@ -2,24 +2,20 @@
  - server ko start karna 
  - server ko database se connect karna
 */
+require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 
-const app = require('./src/app')
+const app = require('./src/app');
 const mongoose = require("mongoose")
 
-function connecTODb (){
-    mongoose.connect("mongodb+srv://vikashdeveloper79_db_user:EzrvdX3h1g3wO2PA@cluster0.xmlty9p.mongodb.net/day-6")
-    .then(()=>{
-        console.log("connected to Database")
+function connectTODb(){
+    mongoose.connect("mongodb+srv://VikashKumar:r13Pys86lxXhJWK5@cluster0.gf5nouh.mongodb.net/day-6").then(()=>{
+        console.log("connected To Database");
     })
 }
-  
-connecTODb()
+
+connectTODb()
+
 
 app.listen(3000,()=>{
-    console.log("server is running on the port 3000") 
-    console.log
+console.log("server is runnning on the port 3000")
 })
-
-
-
-

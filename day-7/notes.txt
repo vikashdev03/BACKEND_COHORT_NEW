@@ -1,0 +1,5 @@
+schema = database ko batana ki hum kis format me data ko store karne wale hai 
+model
+ -  server ke help se database me kuch v operation perform karni ho to model ki jarurat paregi
+
+ - 
