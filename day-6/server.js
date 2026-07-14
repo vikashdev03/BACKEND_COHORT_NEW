@@ -1,9 +1,7 @@
 /* 
- SERVER.JA KA KAAM HAI 
-1. Server ko Start karna
-2. Database se connect Karna 
-
- */
+ - server ko start karna 
+ - server ko database se connect karna
+*/
 
 const app = require('./src/app')
 const mongoose = require("mongoose")
