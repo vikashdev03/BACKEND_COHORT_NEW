@@ -1,9 +1,12 @@
+
 const express = require("express")
 const noteModel = require("./models/note.model")
+const cors = require('cors')
+
 
 const app = express()
+app.use(cors())
 app.use(express.json());
-
 /* POST /api/notes
 - Create new note and save data in mongodb
 -  */
@@ -16,6 +19,7 @@ app.post('/api/notes', async (req , res)=>{
     res.status(201).json({
         message:"note created succesfully ",
         note
+
     })
 })
 
@@ -24,6 +28,7 @@ app.post('/api/notes', async (req , res)=>{
 --fetch all the notes data from mongodb and send them in the response
 */
 app.get("/api/notes", async(req , res)=>{
+    
     const notes = await noteModel.find()
 
     res.status(200).json({
@@ -34,6 +39,7 @@ app.get("/api/notes", async(req , res)=>{
 
 /* 
 -- DELETE /api/notes
+
 -- Delete note with the id from req.params 
 */
 app.delete('/api/notes/:id' , async (req ,res)=>{
@@ -54,7 +60,7 @@ app.delete('/api/notes/:id' , async (req ,res)=>{
     const {description}= req.body
 
     await noteModel.findByIdAndUpdate(id ,{ description})
-    
+
     res.status(200).json({
         message: "Note updated wSuccessfully",
     })
