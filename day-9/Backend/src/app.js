@@ -2,11 +2,15 @@
 const express = require("express")
 const noteModel = require("./models/note.model")
 const cors = require('cors')
+const path = require("path")
 
 
 const app = express()
 app.use(cors())
 app.use(express.json());
+app.use(express.static('./Public/dist')) //  ye kya karta hai ki public folder ke ander har cheej ko publically avaiable bana deta hai 
+
+
 /* POST /api/notes
 - Create new note and save data in mongodb
 -  */
@@ -65,6 +69,13 @@ app.delete('/api/notes/:id' , async (req ,res)=>{
         message: "Note updated wSuccessfully",
     })
     
+ })
+
+ console.log(__dirname)
+
+ app.use('*name', (req , res)=>{
+    res.sendFile(path.join(__dirname, "..", "/public/dist/index.html"))
+
  })
 
  
