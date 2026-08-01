@@ -8,7 +8,7 @@ const path = require("path")
 const app = express()
 app.use(cors())
 app.use(express.json());
-app.use(express.static('./Public/dist')) //  ye kya karta hai ki public folder ke ander har cheej ko publically avaiable bana deta hai 
+app.use(express.static('./Public')) //  ye kya karta hai ki public folder ke ander har cheej ko publically avaiable bana deta hai 
 
 
 /* POST /api/notes
@@ -74,7 +74,7 @@ app.delete('/api/notes/:id' , async (req ,res)=>{
  console.log(__dirname)
 
  app.use('*name', (req , res)=>{
-    res.sendFile(path.join(__dirname, "..", "/public/dist/index.html"))
+    res.sendFile(path.join(__dirname, "..", "/public/index.html"))
 
  })
 
