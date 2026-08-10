@@ -28,6 +28,10 @@ async function registerController(req, res) {
         username,
         email,
         bio,
+        
+
+
+        
         profileImage,
         password: hash
     })
@@ -59,18 +63,6 @@ async function registerController(req, res) {
 
 async function loginController(req, res) {
     const { username, email, password } = req.body
-
-    /**
-     * username
-     * password
-     * 
-     * email
-     * password
-     */
-
-    /**
-     * { username:undefined,email:test@test.com,password:test } = req.body
-     */
 
     const user = await userModel.findOne({
         $or: [
