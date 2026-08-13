@@ -1,23 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose")
 
 
- const PostSchema= new mongoose.Schema({
+const postSchema = new mongoose.Schema({
+    caption: {
+        type: String,
+        default: ""
+    },
+    imgurl: {
+        type: String,
+        required: [ true, "imgUrl is required for creating an post" ]
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+        required: [ true, "user id is required for creating an post" ]
+    }
+})
 
-    caption:{
-            type : String,
-            default:"",
-        },
-        img_url:{
-            type: String,
-            require: [true , " image is compulsory for creating a post"]
-        },
-        user:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref: "",
-            require:[true , "user id is required for creaating a post"]
-        }
- })
 
- const postModel = mongoose.model("posts" , PostSchema)
+const postModel = mongoose.model("posts", postSchema)
 
- module.exports = postModel
+
+module.exports = postModel
