@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default:"https://ik.imagekit.io/tai57l8rz/1777312127437.jpg?updatedAt=1786002039735"
     }
+     
 
 })
 

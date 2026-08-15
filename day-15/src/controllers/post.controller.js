@@ -1,7 +1,7 @@
 const postModel = require("../models/post.model")
 const Imagekit = require('@imagekit/nodejs')
 const { toFile } = require('@imagekit/nodejs')
-const { Folders } = require("@imagekit/nodejs/resources.js")
+// const { Folders } = require("@imagekit/nodejs/resources.js")
 const jwt = require("jsonwebtoken")
 
 const imagekit = new Imagekit({
@@ -14,22 +14,23 @@ async function CreatePostController(req, res) {
 
     const token = req.cookies.token
 
-    if(!token){
+    if (!token) {
         return res.status(401).json({
             message: "Token Not provided , Unauthorized access"
         })
     }
 
-    try{
+    let decoded = null;
+    try {
         decoded = jwt.verify(token, process.env.JWT_SECRET)
-    }catch(err){
+    } catch (err) {
         return res.status(401).json({
             message: "User Not Authorished hai "
         })
     }
 
-    console.log(decoded)
-    
+    // console.log(decoded)
+
 
     const file = await imagekit.files.upload({
         file: await toFile(Buffer.from(req.file.buffer), 'file'),
@@ -40,16 +41,55 @@ async function CreatePostController(req, res) {
     const post = await postModel.create({
         caption: req.body.caption,
         imgurl: file.url,
-        user:decoded.id
+        user: decoded.id
     })
-    
+
     res.status(201).json({
-        message:"Post created SuccessFully.",
+        message: "Post created SuccessFully.",
         post
     })
 
 }
 
+async function getPostController(req, res) {
+
+    const token = req.cookies.token
+
+    if (!token) {
+        return res.status(401).json({
+            message: "UnAuthorized Access"
+        })
+    }
+
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET)
+    } catch (err) {
+        return res.status(401).json({
+            message: "Token invalid"
+        })
+    }
+
+    const userId = decoded.id
+
+    const posts = await postModel.find({
+        user: userId
+    })
+
+    res.status(200)
+        .json({
+            message: "Posts fetched successfully.",
+            posts
+        })
+
+}
+
+
+// const userId = decoded.id
+
+
+
 module.exports = {
-    CreatePostController
+    CreatePostController ,
+    getPostController
 }
