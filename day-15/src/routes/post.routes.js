@@ -18,6 +18,14 @@ postRouter.post("/" , upload.single("image"), postController.CreatePostControlle
 postRouter.get("/", postController.getPostController)
 
 
+/*
+ * GET /api/posts/details/:Postid
+ * - return an detail cbout specific post with the id . also check wheather the post 
+ * 
+ * belongs to the user that the request come from 
+ */
+postRouter.get("/details/:postId" , postController.getPostDetailsController)
+
 
 module.exports = postRouter 
  
