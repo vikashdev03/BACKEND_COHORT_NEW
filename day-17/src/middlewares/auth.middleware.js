@@ -10,7 +10,7 @@ async function identifyUser(req ,res , next){
         })
     }
 
-    let decoded
+    let decoded = null ; 
 
     try {
         

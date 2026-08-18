@@ -28,10 +28,6 @@ async function registerController(req, res) {
         username,
         email,
         bio,
-        
-
-
-        
         profileImage,
         password: hash
     })
@@ -49,8 +45,8 @@ async function registerController(req, res) {
     res.status(201).json({
         message: "User Registered successfully",
         user: {
-            email: user.email,
             username: user.username,
+            email: user.email,
             bio: user.bio,
             profileImage: user.profilePicture,
             
@@ -93,7 +89,7 @@ async function loginController(req, res) {
     }
 
     const token = jwt.sign(
-        { id: user._id },
+        { id: user._id }, 
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     )
