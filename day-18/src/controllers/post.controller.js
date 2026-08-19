@@ -32,7 +32,6 @@ async function CreatePostController(req, res) {
 
 }
 
-
 async function getAllUserPostController(req, res) {
 
   
