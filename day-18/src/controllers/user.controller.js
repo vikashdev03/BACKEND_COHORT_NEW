@@ -14,6 +14,7 @@ async function followUserController(req, res){
             })
         }
 
+        //user check kar rhe ki user hai ya nahi jo follow karna chahte hai
         const isfolloweeExist = await userModel.findOne({
             username : followeeUsername
         })
@@ -54,7 +55,7 @@ async function UnfollowUserCrontroller(req , res){
     const followerUsername = req.user.username
     const followeeUsername = req.params.username
 
-    const isUserfollowing = await userModel.findOne({
+    const isUserfollowing = await followModel.findOne({
         follower : followerUsername,
         followee : followeeUsername
 
