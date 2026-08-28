@@ -1,0 +1,16 @@
+==> Authentication
+    => registerController  (1. user ka data save krna. 2. token user ko dena)
+    => loginController 
+
+    => logout (token blacklisting)
+    => [OTP based registration]
+
+==> post
+    => CreatePostController
+    => getPostController
+    => getPostDetailsController
+   
+
+==> users
+    => followers
+    => following
