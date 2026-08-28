@@ -1,4 +1,4 @@
-import { RouterProvider} from 'react-router'
+// import { RouterProvider} from 'react-router'
 import AppRoutes from './Approutes.jsx'
 import "./style.scss"
 
@@ -12,3 +12,4 @@ function App() {
 }
 
 export default App
+ 
