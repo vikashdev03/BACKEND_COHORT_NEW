@@ -1,6 +1,8 @@
 const userModel = require("../models/user.model")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const blacklistModel = require("../models/blacklist.model")
+const redis = require("../config/cache");
 
 async function registerUser(req, res) {
     const { username, email, password } = req.body;
@@ -19,7 +21,7 @@ async function registerUser(req, res) {
 
     const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "1h" })
 
-    res.cookie("jwt_token", token)
+    res.cookie("token", token)
 
     res.status(201).json({
         message: "User Registered Successfully",
@@ -36,7 +38,7 @@ async function loginUser(req, res) {
         {
             $or: [{ email }, { username }]
         }
-    );
+    ).select("+password") // password ko bhi select kar lo taki hum usko compare kar sake
 
     if (!user) {
         return res.status(400).json(
@@ -62,8 +64,41 @@ async function loginUser(req, res) {
 
     )
 
-    res.cookie("jwt_token", token)
+    res.cookie("token", token)
+
+     res.status(200).json({
+        message: "User Logged In Successfully",
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email
+            // password: user.password
+        }
+    });
 }
 
+async function getMe(req, res) {
+    const user = await userModel.findById(req.user.id)
+    
 
-module.exports = { registerUser, loginUser }
+    res.status(200).json({
+        message: "User fetched successfully",
+        user
+    })
+}
+
+async function logoutUser(req,res){
+
+    const token = req.cookies.token
+
+    res.clearCookie("token")
+
+    await redis.set(token , "blacklisted" , "EX", 60 * 60)
+
+
+    res.status(200).json({
+        message: "User logged out successfully"
+    })
+}
+
+module.exports = { registerUser, loginUser , getMe ,logoutUser };
